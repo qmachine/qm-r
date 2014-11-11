@@ -1,0 +1,10 @@
+Package: qm
+Title: An R client for QMachine, a platform for World Wide Computing
+Version: 0.0.0.9000
+Authors@R: "Sean Wilkinson <sean@mathbiol.org> [aut, cre]"
+Description: This package allows R programs to distribute computations using
+    the QMachine web service. See the QMachine website for more information.
+Depends: R (>= 3.1.2)
+License: Apache-2.0
+LazyData: true
+URL: https://www.qmachine.org/

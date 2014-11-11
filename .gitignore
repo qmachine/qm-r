@@ -1,0 +1,40 @@
+#-  Git configuration file
+
+#-  .gitignore ~~
+#
+#   This file contains user-defined filename patterns that Git should ignore
+#   when it computes changes. Typically, we want to ignore any hidden or
+#   temporary files created by the operating system or text editor, but I must
+#   stress that we do not, under _any_ circumstances, want to add a rule that
+#   may cause us to exclude an important file accidentally. Thus, my own policy
+#   is to script and monitor every step of my workflow except for version
+#   control -- always execute your commits manually!
+#
+#                                                       ~~ (c) SRW, 31 Oct 2011
+#                                                   ~~ last updated 11 Nov 2014
+
+#-  R temporary files
+
+.Rproj.user
+.Rhistory
+.RData
+
+#-  Vim files (taken from http://git.io/qmQqxA)
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+#-  OS generated files (adapted from http://git.io/fBFWrw)
+._*
+.DS_Store
+.DS_Store?
+.localized
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+Thumbs.db
+
+#-  vim:set syntax=gitconfig:
