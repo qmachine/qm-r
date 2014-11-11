@@ -10,6 +10,6 @@ In the meantime, you can install the package and try it out by using the
 [devtools](https://github.com/hadley/devtools) package:
 
 ```r
-devtools::install('qmachine/qm-r')
+devtools::install_github('qmachine/qm-r')
 ```
 
