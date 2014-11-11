@@ -10,5 +10,5 @@ LazyData: true
 URL: https://www.qmachine.org/
 BugReports: https://github.com/qmachine/qm-r/issues
 Imports:
-    jsonlite
+    jsonlite,
     RCurl
