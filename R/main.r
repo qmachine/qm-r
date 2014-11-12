@@ -15,16 +15,16 @@ get_avar <- function(box = uuid(), key) {
         stop('`get_avar` requires a known `key`.')
     }
     path = stringr::str_c('box/', box, '?key=', key, collapse = '')
-    req <- GET(mothership, path = path)
-    cat(content(req, as = 'text'), '\n', sep = '')
+    req <- httr::GET(mothership, path = path)
+    cat(httr::content(req, as = 'text'), '\n', sep = '')
     return(req)
 }
 
 get_jobs <- function(box = uuid(), status = 'waiting') {
   # This function needs documentation.
     path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
-    req <- GET(mothership, path = path)
-    cat(content(req, as = 'text'), '\n', sep = '')
+    req <- httr::GET(mothership, path = path)
+    cat(httr::content(req, as = 'text'), '\n', sep = '')
     return(req)
 }
 
@@ -42,10 +42,10 @@ set_avar <- function(box = mothership, key = uuid(), status = NULL, val = 0) {
     if (missing(status) == FALSE) {
         avar['status'] = status
     }
-    req <- POST(mothership, content_type_json(),
+    req <- httr::POST(mothership, httr::content_type_json(),
             path = stringr::str_c('box/', box, '?key=', key, collapse = ''),
             body = jsonlite::toJSON(avar, auto_unbox = TRUE))
-    cat(content(req, as = 'text'), '\n', sep = '')
+    cat(httr::content(req, as = 'text'), '\n', sep = '')
     return(req)
 }
 
