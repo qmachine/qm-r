@@ -13,14 +13,21 @@ In the meantime, you can install the package and try it out by using the
 library(devtools)
 devtools::install_github('qmachine/qm-r')
 
-test_box <- 'try-from-r'
+test_box <- qm::uuid()
 test_key <- qm::uuid()
-test_val <- 1:5
+job1 <- list(x = 2, f = function(x) x + 2)
 
-qm::set_avar(box = test_box, key = test_key, val = test_val)
+qm::set_avar(box = test_box, key = test_key, status = 'waiting', val = job1)
 
-test_val2 <- qm::get_avar(box = test_box, key = test_key)$val
+job_list <- qm::get_jobs(box = test_box, status = 'waiting')
 
-print(identical(test_val, test_val2))
+job2 <- qm::get_avar(box = test_box, key = job_list[1])$val
+
+# Has the computation been transferred faithfully?
+
+y1 <- job1$f(job1$x)
+y2 <- job2$f(job2$x)
+
+print(identical(y1, y2))
 ```
 
