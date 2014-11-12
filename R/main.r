@@ -16,4 +16,10 @@ main <- function() {
     cat('Hooray, it worked!\n')
 }
 
+uuid <- function() {
+  # This function needs documentation.
+    x <- sample(c(0:9, letters[1:6]), size = 32, replace = TRUE)
+    return(paste(x, collapse = ''))
+}
+
 #-  vim:set syntax=r:
