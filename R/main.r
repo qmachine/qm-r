@@ -65,11 +65,6 @@ set_avar <- function(box = mothership, key = uuid(), status = NULL, val = NULL){
     return(NULL)
 }
 
-submit <- function(x, f, box = uuid(), env = environment(f)) {
-  # This function needs documentation.
-    cat('(`submit` placeholder)\n')
-}
-
 uuid <- function() {
   # This function needs documentation.
     x <- sample(c(0:9, letters[1:6]), size = 32, replace = TRUE)
