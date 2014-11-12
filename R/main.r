@@ -16,16 +16,28 @@ get_avar <- function(box = uuid(), key) {
     }
     path = stringr::str_c('box/', box, '?key=', key, collapse = '')
     req <- httr::GET(mothership, path = path)
-    cat(httr::content(req, as = 'text'), '\n', sep = '')
-    return(req)
+    if (req$status_code != 200) {
+        stop('HTTP failure: ', req$status_code, '\n')
+    }
+    text <- httr::content(req, as = 'text')
+    #cat(text, '\n', sep = '')
+    avar <- jsonlite::fromJSON(text)
+    avar$val <- jsonlite::unserializeJSON(avar$val)
+    return(avar)
 }
 
 get_jobs <- function(box = uuid(), status = 'waiting') {
   # This function needs documentation.
     path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
+    #cat(path, '\n', sep = '')
     req <- httr::GET(mothership, path = path)
-    cat(httr::content(req, as = 'text'), '\n', sep = '')
-    return(req)
+    if (req$status_code != 200) {
+        stop('HTTP failure: ', req$status_code, '\n')
+    }
+    text <- httr::content(req, as = 'text')
+    #cat(text, '\n', sep = '')
+    jobs <- jsonlite::fromJSON(text)
+    return(jobs)
 }
 
 main <- function() {
@@ -36,17 +48,21 @@ main <- function() {
 
 mothership <- 'https://api.qmachine.org/'
 
-set_avar <- function(box = mothership, key = uuid(), status = NULL, val = 0) {
+set_avar <- function(box = mothership, key = uuid(), status = NULL, val = NULL){
   # This function needs documentation.
     avar <- list(box = box, key = key, val = jsonlite::serializeJSON(val))
     if (missing(status) == FALSE) {
-        avar['status'] = status
+        avar$status = status
     }
     req <- httr::POST(mothership, httr::content_type_json(),
             path = stringr::str_c('box/', box, '?key=', key, collapse = ''),
             body = jsonlite::toJSON(avar, auto_unbox = TRUE))
-    cat(httr::content(req, as = 'text'), '\n', sep = '')
-    return(req)
+    if (req$status_code != 201) {
+        stop('HTTP failure: ', req$status_code, '\n')
+    }
+    #text <- httr::content(req, as = 'text')
+    #cat(text, '\n', sep = '')
+    return(NULL)
 }
 
 submit <- function(x, f, box = uuid(), env = environment(f)) {
