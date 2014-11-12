@@ -31,3 +31,8 @@ y2 <- job2$f(job2$x)
 print(identical(y1, y2))
 ```
 
+The higher-level functions like `submit` that were used in the
+[original paper](http://www.biomedcentral.com/1471-2105/15/176)
+have not yet been implemented, but they are relatively easy to build from the
+three base functions shown above :-)
+
