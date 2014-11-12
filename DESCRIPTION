@@ -5,9 +5,9 @@ Authors@R: "Sean Wilkinson <sean@mathbiol.org> [aut, cre]"
 Description: This package allows R programs to distribute computations using
     the QMachine web service. See the QMachine website for more information.
 Depends: R (>= 3.1.2)
+Imports:
+    httr
 License: Apache-2.0
 LazyData: true
 URL: https://www.qmachine.org/
 BugReports: https://github.com/qmachine/qm-r/issues
-Imports:
-    httr
