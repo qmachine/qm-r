@@ -17,7 +17,7 @@ get_avar <- function(box = uuid(), key) {
     stop('`get_avar` requires a known `key`.')
   }
   path <- stringr::str_c('box/', box, '?key=', key, collapse = '')
-  req <- httr::GET(mothership, path = path)
+  req <- httr::GET('https://api.qmachine.org/', path = path)
   if (req$status_code != 200) {
     stop('HTTP failure: ', req$status_code, '\n')
   }
@@ -33,28 +33,26 @@ get_avar <- function(box = uuid(), key) {
 #' @return An R list
 get_jobs <- function(box = uuid(), status = 'waiting') {
   path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
-  req <- httr::GET(mothership, path = path)
+  req <- httr::GET('https://api.qmachine.org/', path = path)
   if (req$status_code != 200) {
     stop('HTTP failure: ', req$status_code, '\n')
   }
   return(jsonlite::fromJSON(httr::content(req, as = 'text')))
 }
 
-mothership <- 'https://api.qmachine.org/'
-
 #' Write an avar by known box and known key.
 #'
 #' @param box A string.
 #' @param key A string.
 #' @param status A string.
-#' @param val
+#' @param val Any R data type.
 #' @return NULL
 set_avar <- function(box = uuid(), key = uuid(), status = NULL, val = NULL) {
   avar <- list(box = box, key = key, val = jsonlite::serializeJSON(val))
   if (missing(status) == FALSE) {
     avar$status = status
   }
-  req <- httr::POST(mothership, httr::content_type_json(),
+  req <- httr::POST('https://api.qmachine.org/', httr::content_type_json(),
       path = stringr::str_c('box/', box, '?key=', key, collapse = ''),
       body = jsonlite::toJSON(avar, auto_unbox = TRUE))
   if (req$status_code != 201) {

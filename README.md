@@ -63,3 +63,7 @@ for the  [original paper](http://www.biomedcentral.com/1471-2105/15/176) also
 provided higher-order `map`, `reduce`, and `mapreduce` patterns, but those have
 not been included here.
 
+---
+
+[![Build Status](https://travis-ci.org/qmachine/qm-r.png?branch=master)](https://travis-ci.org/qmachine/qm-r)
+

@@ -12,7 +12,7 @@ set_avar(box = uuid(), key = uuid(), status = NULL, val = NULL)
 
 \item{status}{A string.}
 
-\item{val}{}
+\item{val}{Any R data type.}
 }
 \description{
 Write an avar by known box and known key.
