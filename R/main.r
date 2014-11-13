@@ -20,9 +20,7 @@ get_avar <- function(box = uuid(), key) {
     if (req$status_code != 200) {
         stop('HTTP failure: ', req$status_code, '\n')
     }
-    text <- httr::content(req, as = 'text')
-    #cat(text, '\n', sep = '')
-    avar <- jsonlite::fromJSON(text)
+    avar <- jsonlite::fromJSON(httr::content(req, as = 'text'))
     avar$val <- jsonlite::unserializeJSON(avar$val)
     return(avar)
 }
@@ -30,21 +28,11 @@ get_avar <- function(box = uuid(), key) {
 get_jobs <- function(box = uuid(), status = 'waiting') {
   # This function needs documentation.
     path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
-    #cat(path, '\n', sep = '')
     req <- httr::GET(mothership, path = path)
     if (req$status_code != 200) {
         stop('HTTP failure: ', req$status_code, '\n')
     }
-    text <- httr::content(req, as = 'text')
-    #cat(text, '\n', sep = '')
-    jobs <- jsonlite::fromJSON(text)
-    return(jobs)
-}
-
-main <- function() {
-  # This function is just a placeholder right now, rather than the "main" entry
-  # point for execution that the name would suggest ...
-    cat('Hooray, it worked!\n')
+    return(jsonlite::fromJSON(httr::content(req, as = 'text')))
 }
 
 mothership <- 'https://api.qmachine.org/'
@@ -61,9 +49,7 @@ set_avar <- function(box = uuid(), key = uuid(), status = NULL, val = NULL) {
     if (req$status_code != 201) {
         stop('HTTP failure: ', req$status_code, '\n')
     }
-    #text <- httr::content(req, as = 'text')
-    #cat(text, '\n', sep = '')
-    return(NULL)
+    return(invisible(NULL))
 }
 
 submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
@@ -83,8 +69,7 @@ submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
         task <- get_avar(box = box, key = task_key)
         status <- task$status
     }
-    y <- get_avar(box = box, key = task$val$y)
-    return(y$val)
+    return(get_avar(box = box, key = task$val$y)$val)
 }
 
 uuid <- function() {
