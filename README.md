@@ -16,7 +16,7 @@ devtools::install_github('qmachine/qm-r')
 
 
 Introduction
-============
+------------
 
 Having installed `qm`, you can now start distributing computations and also
 volunteering your own computer as part of a crowdsourced supercomputer, using
