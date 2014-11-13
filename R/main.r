@@ -8,7 +8,6 @@
 #                                                   ~~ last updated 13 Nov 2014
 
 #' Read an avar's remote representation by known box and known key.
-#' Read the remote representation of an "asynchronous variable" ("avar").
 #'
 #' @param box A string.
 #' @param key A string.
