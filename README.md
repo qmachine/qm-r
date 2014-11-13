@@ -22,7 +22,7 @@ Having installed `qm`, you can now start distributing computations and also
 volunteering your own computer as part of a crowdsourced supercomputer, using
 only R :-)
 
-To volunteer to run jobs for `box` called "test-from-r" (more on this later), 
+To volunteer to run jobs for the "test-from-r" `box` (more on this later), 
 
 ```r
 library(qm)
@@ -34,8 +34,9 @@ while (TRUE) {
 ```
 
 
-Some examples for submitting jobs are shown below. Note that, if your `box` has
-no volunteers, your jobs will not be executed.
+Some examples for submitting jobs are shown below, again using the
+"test-from-r" `box`. Note that, if your `box` has no volunteers, your jobs will
+not be executed.
 
 ```r
 library(qm)
