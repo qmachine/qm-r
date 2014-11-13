@@ -28,8 +28,8 @@ To volunteer to run jobs for the "test-from-r" `box` (more on this later),
 library(qm)
 
 while (TRUE) {
-    qm::volunteer(box = 'test-from-r')
-    Sys.sleep(1)
+  qm::volunteer(box = 'test-from-r')
+  Sys.sleep(1)
 }
 ```
 
