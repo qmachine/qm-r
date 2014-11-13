@@ -3,11 +3,16 @@
 #-  main.r ~~
 #
 #   This file is contains a rough R client for the QMachine web service.
-#   Roxygen documentation will be added soon :-)
 #
 #                                                       ~~ (c) SRW, 11 Nov 2014
 #                                                   ~~ last updated 13 Nov 2014
 
+#' Read an avar's remote representation by known box and known key.
+#' Read the remote representation of an "asynchronous variable" ("avar").
+#'
+#' @param box A string.
+#' @param key A string.
+#' @return An R list
 get_avar <- function(box = uuid(), key) {
   if (missing(key)) {
     stop('`get_avar` requires a known `key`.')
@@ -22,6 +27,11 @@ get_avar <- function(box = uuid(), key) {
   return(avar)
 }
 
+#' Read a list of keys for tasks that have a known box and known status.
+#'
+#' @param box A string.
+#' @param status A string.
+#' @return An R list
 get_jobs <- function(box = uuid(), status = 'waiting') {
   path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
   req <- httr::GET(mothership, path = path)
@@ -33,6 +43,13 @@ get_jobs <- function(box = uuid(), status = 'waiting') {
 
 mothership <- 'https://api.qmachine.org/'
 
+#' Write an avar by known box and known key.
+#'
+#' @param box A string.
+#' @param key A string.
+#' @param status A string.
+#' @param val
+#' @return NULL
 set_avar <- function(box = uuid(), key = uuid(), status = NULL, val = NULL) {
   avar <- list(box = box, key = key, val = jsonlite::serializeJSON(val))
   if (missing(status) == FALSE) {
@@ -47,9 +64,13 @@ set_avar <- function(box = uuid(), key = uuid(), status = NULL, val = NULL) {
   return(invisible(NULL))
 }
 
-# The following function uses the functional signature from the original QM
-# paper, except that it returns the native value stored in the `val` property
-# instead of the "avar" itself.
+#' Submit a job to be distributed to a remote execution context.
+#'
+#' @param box A string.
+#' @param env An environment.
+#' @param f A function.
+#' @param x Input data
+#' @return The results of `f(x)`
 submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
   f_key <- uuid()
   x_key <- uuid()
@@ -71,11 +92,20 @@ submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
   return(y$val)
 }
 
+#' Create a universally unique identifier.
+#'
+#' @return A random hexadecimal string of length 32.
+#'
+#' Note that this is not RFC 4122 compliant ...
 uuid <- function() {
   x <- sample(c(0:9, letters[1:6]), size = 32, replace = TRUE)
   return(stringr::str_c(x, collapse = ''))
 }
 
+#' Volunteer once to execute a job for a known box.
+#'
+#' @param box A string.
+#' @return NULL
 volunteer <- function(box = uuid()) {
   job_list <- get_jobs(box = box, status = 'waiting')
   if (length(job_list) == 0) {
