@@ -82,7 +82,6 @@ submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
         Sys.sleep(1)
         task <- get_avar(box = box, key = task_key)
         status <- task$status
-        print(status)
     }
     y <- get_avar(box = box, key = task$val$y)
     return(y$val)
