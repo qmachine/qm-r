@@ -2,11 +2,11 @@
 
 #-  main.r ~~
 #
-#   This file is contains a very rough R client for the QMachine web service.
-#   It is not intended for production use!
+#   This file is contains a rough R client for the QMachine web service.
+#   Roxygen documentation will be added soon :-)
 #
 #                                                       ~~ (c) SRW, 11 Nov 2014
-#                                                   ~~ last updated 12 Nov 2014
+#                                                   ~~ last updated 13 Nov 2014
 
 get_avar <- function(box = uuid(), key) {
   # This function needs documentation.
