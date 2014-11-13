@@ -1,12 +1,11 @@
 qm
 ==
 
-This is an R package that will enable the use of the
-[QMachine](https://www.qmachine.org) web service for distributing computations.
-
-Obviously, this project is still very incomplete, and it will probably be a
-little while before it becomes available on [CRAN](http://cran.r-project.org).
-In the meantime, you can install the package and try it out by using the
+This repository contains the R client for [QMachine](https://www.qmachine.org),
+a web service for distributing computations. The client will be published as
+its own R package on [CRAN](http://cran.r-project.org) -- hopefully as `qm` --
+in the near future, but it is still very rough. In the meantime, you can
+install it and try it out thanks to the excellent
 [devtools](https://github.com/hadley/devtools) package:
 
 ```r
