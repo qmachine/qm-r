@@ -8,8 +8,6 @@
 #                                                       ~~ (c) SRW, 11 Nov 2014
 #                                                   ~~ last updated 12 Nov 2014
 
-library(httr)
-
 get_avar <- function(box = uuid(), key) {
   # This function needs documentation.
     if (missing(key)) {
