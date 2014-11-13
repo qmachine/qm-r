@@ -55,8 +55,6 @@ set_avar <- function(box = uuid(), key = uuid(), status = NULL, val = NULL) {
     if (missing(status) == FALSE) {
         avar$status = status
     }
-    path <- stringr::str_c('box/', box, '?key=', key, collapse = '')
-    print(path)
     req <- httr::POST(mothership, httr::content_type_json(),
             path = stringr::str_c('box/', box, '?key=', key, collapse = ''),
             body = jsonlite::toJSON(avar, auto_unbox = TRUE))
