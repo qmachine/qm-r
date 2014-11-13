@@ -12,27 +12,52 @@ In the meantime, you can install the package and try it out by using the
 ```r
 library(devtools)
 devtools::install_github('qmachine/qm-r')
-
-test_box <- qm::uuid()
-test_key <- qm::uuid()
-job1 <- list(x = 2, f = function(x) x + 2)
-
-qm::set_avar(box = test_box, key = test_key, status = 'waiting', val = job1)
-
-job_list <- qm::get_jobs(box = test_box, status = 'waiting')
-
-job2 <- qm::get_avar(box = test_box, key = job_list[1])$val
-
-# Has the computation been transferred faithfully?
-
-y1 <- job1$f(job1$x)
-y2 <- job2$f(job2$x)
-
-print(identical(y1, y2))
 ```
 
-The higher-level functions like `submit` that were used in the
-[original paper](http://www.biomedcentral.com/1471-2105/15/176)
-have not yet been implemented, but they are relatively easy to build from the
-three base functions shown above :-)
+
+Introduction
+============
+
+Having installed `qm`, you can now start distributing computations and also
+volunteering your own computer as part of a crowdsourced supercomputer, using
+only R :-)
+
+To volunteer to run jobs for `box` called "test-from-r" (more on this later), 
+
+```r
+library(qm)
+
+while (TRUE) {
+    qm::volunteer(box = 'test-from-r')
+    Sys.sleep(1)
+}
+```
+
+
+Some examples for submitting jobs are shown below. Note that, if your `box` has
+no volunteers, your jobs will not be executed.
+
+```r
+library(qm)
+
+qm_box <- 'test-from-r'
+
+cat('Submitting jobs to "', qm_box, '" box ...\n', sep = '')
+
+# Example 1: 2 + 2
+
+f <- function(x) x + 2
+x <- 2
+y <- qm::submit(box = qm_box, f = f, x = x)
+
+print(y)
+
+# Example 2: Summing numbers with built-in functions
+
+print(qm::submit(box = qm_box, f = sum, x = 1:5))
+```
+
+The [original paper](http://www.biomedcentral.com/1471-2105/15/176) also
+implements higher-order `map`, `reduce`, and `mapreduce` patterns in JS, but
+those have not been included here.
 
