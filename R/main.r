@@ -67,7 +67,11 @@ submit <- function(x = NULL, f, box = uuid(), env = environment(f)) {
         task <- get_avar(box = box, key = task_key)
         status <- task$status
     }
-    return(get_avar(box = box, key = task$val$y)$val)
+    y <- get_avar(box = box, key = task$val$y)
+    if (status == 'failed') {
+        stop(y$val)
+    }
+    return(y$val)
 }
 
 uuid <- function() {
@@ -87,10 +91,12 @@ volunteer <- function(box = uuid()) {
     set_avar(box = box, key = task$key, status = 'running', val = task$val)
     f <- get_avar(box = box, key = task$val$f)$val
     x <- get_avar(box = box, key = task$val$x)$val
-    y <- f(x)
+    y <- tryCatch(list(status = 'done', y = f(x)), error = function(err) {
+        return(list(status = 'failed', y = err))
+    })
     task$val$y <- uuid()
-    set_avar(box = box, key = task$val$y, val = y)
-    set_avar(box = box, key = task$key, status = 'done', val = task$val)
+    set_avar(box = box, key = task$val$y, val = y$y)
+    set_avar(box = box, key = task$key, status = y$status, val = task$val)
     cat('Done: ', task$key, '\n', sep = '')
     return(invisible(NULL))
 }
