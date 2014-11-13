@@ -20,7 +20,8 @@ Introduction
 
 Having installed `qm`, you can now start distributing computations and also
 volunteering your own computer as part of a crowdsourced supercomputer, using
-only R :-)
+only R. The convention used in this library is to transform input data `x` to
+output data `y` with a function `f`.
 
 To volunteer to run jobs for the "test-from-r" `box` (more on this later), 
 
@@ -58,7 +59,8 @@ print(y)
 print(qm::submit(box = qm_box, f = sum, x = 1:5))
 ```
 
-The [original paper](http://www.biomedcentral.com/1471-2105/15/176) also
-implements higher-order `map`, `reduce`, and `mapreduce` patterns in JS, but
-those have not been included here.
+The [browser client](https://github.com/qmachine/qm-browser-client) developed
+for the  [original paper](http://www.biomedcentral.com/1471-2105/15/176) also
+provided higher-order `map`, `reduce`, and `mapreduce` patterns, but those have
+not been included here.
 
