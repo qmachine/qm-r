@@ -7,7 +7,7 @@ Description: This package allows R programs to distribute computations using
 Depends:
     R (>= 3.1.2)
 LazyData: true
-License: file LICENSE
+License: Apache-2.0
 URL: https://www.qmachine.org/
 BugReports: https://github.com/qmachine/qm-r/issues
 Imports:
