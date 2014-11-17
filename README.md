@@ -43,8 +43,6 @@ library(qm)
 
 qm_box <- 'test-from-r'
 
-cat('Submitting jobs to "', qm_box, '" box ...\n', sep = '')
-
 # Example 1: 2 + 2
 
 f <- function(x) x + 2
@@ -61,7 +59,7 @@ print(qm::submit(box = qm_box, f = sum, x = 1:5))
 The [browser client](https://github.com/qmachine/qm-browser-client) developed
 for the  [original paper](http://www.biomedcentral.com/1471-2105/15/176) also
 provided higher-order `map`, `reduce`, and `mapreduce` patterns, but those have
-not been included here.
+not been included in this package.
 
 ---
 
