@@ -51,7 +51,7 @@ y <- qm::submit(box = qm_box, f = f, x = x)
 
 print(y)
 
-# Example 2: Summing numbers with built-in functions
+# Example 2: Summing numbers with built-in (native) functions
 
 print(qm::submit(box = qm_box, f = sum, x = 1:5))
 ```
