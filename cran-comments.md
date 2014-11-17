@@ -5,22 +5,7 @@
 
 
 ## R CMD check results
-There were no ERRORs.
-
-There was 1 WARNING:
-
-* Non-standard license specification:
-    Apache-2.0 + file LICENSE
-
-  This package should be licensed under Apache 2.0. I'm not sure why Apache is
-  not considered a standard license.
-
-There was 1 NOTE:
-
-* Non-standard files/directories found at top level:
-    ‘cran-comments.md’ ‘qm.Rproj’
-
-  These files are for development only.
+There were no ERRORs, NOTEs, or WARNINGs.
 
 
 ## Downstream dependencies
