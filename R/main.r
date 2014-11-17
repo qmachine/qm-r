@@ -5,7 +5,7 @@
 #   This file is contains a rough R client for the QMachine web service.
 #
 #                                                       ~~ (c) SRW, 11 Nov 2014
-#                                                   ~~ last updated 13 Nov 2014
+#                                                   ~~ last updated 17 Nov 2014
 
 #' Read an avar's remote representation by known box and known key.
 #'
@@ -31,7 +31,7 @@ get_avar <- function(box = uuid(), key) {
 #' @param box A string.
 #' @param status A string.
 #' @return An R list
-get_jobs <- function(box = uuid(), status = 'waiting') {
+get_list <- function(box = uuid(), status = 'waiting') {
   path <- stringr::str_c('box/', box, '?status=', status, collapse = '')
   req <- httr::GET('https://api.qmachine.org/', path = path)
   if (req$status_code != 200) {
@@ -104,7 +104,7 @@ uuid <- function() {
 #' @param box A string.
 #' @return NULL
 volunteer <- function(box = uuid()) {
-  job_list <- get_jobs(box = box, status = 'waiting')
+  job_list <- get_list(box = box, status = 'waiting')
   if (length(job_list) == 0) {
     cat('Nothing to do ...\n')
     return(invisible(NULL))
