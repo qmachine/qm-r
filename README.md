@@ -43,7 +43,7 @@ library(qm)
 
 qm_box <- 'test-from-r'
 
-# Example 1: 2 + 2
+# Example 1: Computing `2 + 2` remotely
 
 f <- function(x) x + 2
 x <- 2
@@ -51,7 +51,7 @@ y <- qm::submit(box = qm_box, f = f, x = x)
 
 print(y)
 
-# Example 2: Summing numbers with built-in (native) functions
+# Example 2: Summing numbers remotely with built-in (native) functions
 
 print(qm::submit(box = qm_box, f = sum, x = 1:5))
 ```
