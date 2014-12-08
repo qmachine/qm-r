@@ -1,6 +1,7 @@
 qm
 ==
 
+
 This repository contains the R client for [QMachine](https://www.qmachine.org),
 a web service for distributing computations. The client will be published as
 its own R package on [CRAN](http://cran.r-project.org) -- hopefully as `qm` --
